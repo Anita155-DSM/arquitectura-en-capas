@@ -1,7 +1,8 @@
-// CAPA DE DATOS: el repository es el unico que lee y escribe en la base.
-// No decide nada: solo guarda y busca lo que le pide la capa de negocio.
+// Datos
+// CAPA DE DATOS, el repository es el unico que lee y escribe en la base
+// No decide nada, solo guarda y busca lo que le pide la capa de negocio
 // Implementa el contrato IBibliotecaRepository y devuelve objetos simples,
-// asi ningun detalle de Sequelize sale de esta capa.
+// asi ningun detalle de Sequelize sale de esta capa
 import { Model } from "sequelize";
 import { Libro, Socio, Prestamo } from "./database";
 import {

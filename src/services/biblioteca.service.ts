@@ -1,4 +1,5 @@
-// CAPA DE NEGOCIO: todas las reglas de la biblioteca estan aca.
+//negocio
+// CAPA DE NEGOCIO, todas las reglas de la biblioteca estan aca.
 // No conoce HTTP (req/res) ni Sequelize: solo reglas y calculos.
 // Si cambia una regla, se cambia SOLO este archivo.
 import { IBibliotecaRepository } from "../database/biblioteca.repository.interface";

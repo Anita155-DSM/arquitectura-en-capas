@@ -1,4 +1,5 @@
-// CAPA DE PRESENTACION (API): recibe la peticion HTTP, llama al service y responde.
+//presentación
+// CAPA DE PRESENTACION (API), recibe la peticion HTTP, llama al service y responde.
 // No valida reglas ni toca la base de datos.
 import { Router, Request, Response } from "express";
 import { BibliotecaService, ErrorNegocio } from "../services/biblioteca.service";

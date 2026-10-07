@@ -1,4 +1,4 @@
-// CAPA DE DATOS: conexion a la base y modelos (las tablas).
+// CAPA DE DATOS, conexion a la base y modelos (las tablas).
 // Es el unico lugar donde se decide que motor se usa (postgres o mysql).
 import {
     Sequelize, Dialect, DataTypes, Model, InferAttributes,
@@ -17,7 +17,7 @@ export const sequelize = new Sequelize(
     }
 );
 
-// ---- Modelos: solo describen las tablas, no tienen reglas de negocio ----
+// modelos, solo describen las tablas, no tienen reglas de negocio ----
 
 export class Libro extends Model<InferAttributes<Libro>, InferCreationAttributes<Libro>> {
     declare id: CreationOptional<number>;

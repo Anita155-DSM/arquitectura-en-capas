@@ -11,8 +11,11 @@
 </head>
 <body>
     <header class="top">
-        <h1>Biblioteca</h1>
-        <p class="sub">Préstamos de libros a socios. Tocá una ficha del catálogo para elegir el libro.</p>
+        <div>
+            <h1>Biblioteca</h1>
+            <p class="sub">Préstamos de libros a socios. Tocá una ficha del catálogo para elegir el libro.</p>
+        </div>
+        <button type="button" id="btn-flujo" class="btn-flujo" aria-expanded="false" aria-controls="panel-flujo">Ver flujo</button>
     </header>
 
     <main class="layout">
@@ -48,6 +51,24 @@
             </div>
         </section>
     </main>
+
+    <!-- panel que muestra el recorrido del ultimo pedido por las capas -->
+    <aside id="panel-flujo" class="flujo" hidden aria-labelledby="titulo-flujo">
+        <div class="flujo-cabecera">
+            <h2 id="titulo-flujo">Flujo de la arquitectura en capas</h2>
+            <button type="button" id="cerrar-flujo" class="cerrar" aria-label="Cerrar el panel">×</button>
+        </div>
+        <p id="flujo-pedido" class="flujo-pedido">Hacé un préstamo o registrá una devolución para ver su recorrido por las capas.</p>
+        <ol class="capas">
+            <li class="capa" data-capa="pres"><strong>Presentación</strong><span>frontend/main.ts · controllers/</span></li>
+            <li class="capa" data-capa="neg"><strong>Negocio</strong><span>services/biblioteca.service.ts</span></li>
+            <li class="capa" data-capa="datos"><strong>Datos</strong><span>database/biblioteca.repository.ts</span></li>
+            <li class="capa" data-capa="db"><strong>Base de datos</strong><span>contenedor de Docker</span></li>
+        </ol>
+        <ol id="flujo-pasos" class="pasos" aria-live="polite"></ol>
+        <button type="button" id="repetir-flujo" class="repetir" hidden>Repetir recorrido</button>
+        <p class="flujo-nota">El método, la URL, el código y el mensaje son los reales de la respuesta del servidor.</p>
+    </aside>
 
     <script type="module" src="js/main.js"></script>
 </body>

@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    container_name: biblioteca-app
+    ports:
+      - "3000:3000"
+    environment:
+      DB_DIALECT: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: biblioteca_db
+      DB_USER: biblioteca
+      DB_PASSWORD: biblioteca
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: biblioteca-postgres
+    environment:
+      POSTGRES_DB: biblioteca_db
+      POSTGRES_USER: biblioteca
+      POSTGRES_PASSWORD: biblioteca
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U biblioteca -d biblioteca_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pg_data:

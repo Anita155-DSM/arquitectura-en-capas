@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Biblioteca: préstamos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="top">
+        <h1>Biblioteca</h1>
+        <p class="sub">Préstamos de libros a socios. Tocá una ficha del catálogo para elegir el libro.</p>
+    </header>
+
+    <main class="layout">
+        <section aria-labelledby="titulo-catalogo">
+            <h2 id="titulo-catalogo">Catálogo</h2>
+            <div id="catalogo" class="catalogo"></div>
+        </section>
+
+        <aside class="panel">
+            <h2>Nuevo préstamo</h2>
+            <form id="form-prestamo" novalidate>
+                <label>Socio
+                    <select id="socio"></select>
+                </label>
+                <label>Libro
+                    <select id="libro"></select>
+                </label>
+                <button type="submit">Prestar</button>
+            </form>
+            <p id="mensaje" class="mensaje" role="status" aria-live="polite" hidden></p>
+            <p class="nota">Plazo de devolución: 7 días. Máximo 3 libros por socio. Multa de $ 500 por día de atraso.</p>
+        </aside>
+
+        <section class="prestamos" aria-labelledby="titulo-prestamos">
+            <h2 id="titulo-prestamos">Préstamos sin devolver</h2>
+            <div class="tabla-scroll">
+                <table>
+                    <thead>
+                        <tr><th>Socio</th><th>Libro</th><th>Prestado</th><th>Vence</th><th>Estado</th><th></th></tr>
+                    </thead>
+                    <tbody id="prestamos"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

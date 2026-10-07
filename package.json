@@ -1,0 +1,22 @@
+{
+  "name": "biblioteca-capas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demo de arquitectura por capas: prestamos de una biblioteca",
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig.front.json",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.11.0",
+    "pg": "^8.13.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2"
+  }
+}

@@ -15,6 +15,7 @@ interface Prestamo {
 }
 
 let libros: Libro[] = [];
+let socios: Socio[] = [];
 
 function el<T extends HTMLElement>(id: string): T {
     const elemento = document.getElementById(id);
@@ -150,6 +151,19 @@ function dibujarPrestamos(prestamos: Prestamo[]) {
     }
 }
 
+// muestra al lado de cada socio cuantos libros tiene prestados (solo cuenta lo que ya llego de la API;
+// el maximo permitido es una regla de negocio y no se repite aca)
+function actualizarSocios(prestamos: Prestamo[]) {
+    const elegido = selectSocio.value;
+    selectSocio.replaceChildren();
+    for (const socio of socios) {
+        const cantidad = prestamos.filter((p) => p.socio.id === socio.id).length;
+        const detalle = cantidad === 0 ? "sin libros" : `${cantidad} ${cantidad === 1 ? "libro" : "libros"}`;
+        selectSocio.add(new Option(`${socio.nombre} (${detalle})`, String(socio.id)));
+    }
+    if (elegido) selectSocio.value = elegido;
+}
+
 async function recargar() {
     const [listaLibros, prestamos] = await Promise.all([
         api<Libro[]>("/api/libros"),
@@ -158,6 +172,7 @@ async function recargar() {
     libros = listaLibros;
     dibujarCatalogo();
     dibujarPrestamos(prestamos);
+    actualizarSocios(prestamos);
 }
 
 async function devolver(p: Prestamo) {
@@ -183,7 +198,7 @@ form.addEventListener("submit", async (evento) => {
     try {
         const prestamo = await api<Prestamo>("/api/prestamos", { method: "POST", body: cuerpo });
         registrarFlujo(flujoPrestamo(cuerpo, 201, ""));
-        const socio = selectSocio.selectedOptions[0]?.text ?? "";
+        const socio = socios.find((s) => String(s.id) === selectSocio.value)?.nombre ?? "";
         const libro = selectLibro.selectedOptions[0]?.text ?? "";
         mostrarMensaje(`Préstamo registrado: "${libro}" para ${socio}. Vence el ${formatoFecha(prestamo.fechaVencimiento)}.`);
         await recargar();
@@ -393,8 +408,7 @@ document.addEventListener("keydown", (e) => {
 
 async function iniciar() {
     try {
-        const socios = await api<Socio[]>("/api/socios");
-        for (const socio of socios) selectSocio.add(new Option(socio.nombre, String(socio.id)));
+        socios = await api<Socio[]>("/api/socios");
         await recargar();
         for (const libro of libros) selectLibro.add(new Option(libro.titulo, String(libro.id)));
         marcarFichaElegida();

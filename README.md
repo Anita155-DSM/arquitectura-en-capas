@@ -1,7 +1,6 @@
 # Biblioteca: demo de arquitectura por capas
 
-Trabajo de investigación de Taller de Lenguajes de Programación IV (Instituto Politécnico Formosa).
-Gestión de préstamos de libros a socios, organizada en **capas**.
+Trabajo de investigación de Taller de Lenguajes de Programación IV (Instituto Politécnico Formosa). Gestión de préstamos de libros a socios, organizada en **capas**.
 
 Stack: Node.js, Express, TypeScript (modo estricto), Sequelize, PostgreSQL y Docker.
 
@@ -13,8 +12,7 @@ Requisito: tener **Docker Desktop** abierto.
 docker compose up --build
 ```
 
-Abrir **http://localhost:3000**. Para apagar: `Ctrl + C` y `docker compose down`.
-Para volver a los datos de ejemplo del principio: `docker compose down -v`.
+Abrir **http://localhost:3000**. Para apagar: `Ctrl + C` y `docker compose down`. Para volver a los datos de ejemplo del principio: `docker compose down -v`.
 
 ## Estructura y capas
 
@@ -32,8 +30,7 @@ src/
 └── server.ts                               → arma las capas y arranca
 ```
 
-Flujo de una petición: **pantalla → controller → service → repository → base de datos**, y la respuesta vuelve por el mismo camino.
-Cada capa solo conoce a la de abajo. En `server.ts` se arman de abajo hacia arriba:
+Flujo de una petición: **pantalla → controller → service → repository → base de datos**, y la respuesta vuelve por el mismo camino. Cada capa solo conoce a la de abajo. En `server.ts` se arman de abajo hacia arriba:
 
 ```ts
 const repository = new BibliotecaRepository();
@@ -49,7 +46,7 @@ const controller = new BibliotecaController(service);
 - **Polimorfismo:** cualquier clase que implemente `IBibliotecaRepository` (por ejemplo, una que guarde en memoria para tests) puede reemplazar al repository sin tocar el service.
 - **Herencia:** `ErrorNegocio extends Error`; los modelos heredan de `Model` de Sequelize.
 
-## Orden recomendado para estudiar el código
+## Orden del código
 
 1. `src/server.ts`: cómo se arman las capas.
 2. `src/services/biblioteca.service.ts`: las reglas (lo más importante para explicar).
@@ -66,8 +63,7 @@ const controller = new BibliotecaController(service);
 5. Plazo de devolución: 7 días.
 6. Multa de $ 500 por cada día de atraso.
 
-Datos de ejemplo: **Kiara** ya tiene 3 libros (y el único ejemplar de *El túnel*);
-**Stella** tiene *Ficciones* vencido hace 3 días.
+Datos de ejemplo: **Kiara** ya tiene 3 libros (y el único ejemplar de *El túnel*); **Stella** tiene *Ficciones* vencido hace 3 días.
 
 ## Prueba de desacoplamiento: cambiar PostgreSQL por MySQL
 
@@ -76,8 +72,7 @@ docker compose down
 docker compose -f docker-compose.yml -f docker-compose.mysql.yml up --build
 ```
 
-La app funciona igual. Solo cambiaron variables de entorno, ninguna línea de `services/`, `controllers/` ni `frontend/`.
-La consola muestra `Base de datos conectada (mysql)`.
+La app funciona igual. Solo cambiaron variables de entorno, ninguna línea de `services/`, `controllers/` ni `frontend/`. La consola muestra `Base de datos conectada (mysql)`.
 
 ## API
 
@@ -87,4 +82,4 @@ La consola muestra `Base de datos conectada (mysql)`.
 | GET | `/api/socios` | Socios |
 | GET | `/api/prestamos` | Préstamos sin devolver, con atraso y multa estimada |
 | POST | `/api/prestamos` | Prestar. Body: `{ "socioId": 3, "libroId": 2 }` |
-| PATCH | `/api/prestamos/:id/devolucion` | Registrar devolución |
+| PATCH | `/api/prestamos/:id/devolucion` | Registrar devolución | 

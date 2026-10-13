@@ -9,6 +9,7 @@ Stack: Node.js, Express, TypeScript (modo estricto), Sequelize, PostgreSQL y Doc
 Requisito: tener **Docker Desktop** abierto.
 
 ```
+npm i //descarga las dependencias necesarias
 docker compose up --build
 ```
 
@@ -82,4 +83,4 @@ La app funciona igual. Solo cambiaron variables de entorno, ninguna línea de `s
 | GET | `/api/socios` | Socios |
 | GET | `/api/prestamos` | Préstamos sin devolver, con atraso y multa estimada |
 | POST | `/api/prestamos` | Prestar. Body: `{ "socioId": 3, "libroId": 2 }` |
-| PATCH | `/api/prestamos/:id/devolucion` | Registrar devolución | 
+| PATCH | `/api/prestamos/:id/devolucion` | Registrar devolución |
